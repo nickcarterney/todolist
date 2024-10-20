@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+html { font-size: 62.5%; font-family: sans-serif;} 
+body { font-size: 1.6rem; place-items: top;}
+
+.todo {
+    @mixin transition($props: all) {
+        transition: $props 0.3s ease;
+    }
+
+    opacity: 0;
+    position: relative;
+    @include transition(opacity);
+    &.show {
+        opacity: 1;
+    }
+
+    input {
+        line-height: 4rem;
+        padding: 0 2.4rem;
+        width: 100%;
+    }
+
+    &-counter,
+    &-actions,
+    &-results {
+        position: sticky;
+        top: 4rem;
+        list-style: none;
+        text-align: left;
+        padding: 0;
+    }
+
+    &-results {
+        background: #111;
+        width: 100%;
+        padding: 1.6rem 0;
+        overflow: auto;
+        height: 32rem;
+        &.show {
+            display: block;
+        }
+    }
+    &-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        .selected {
+            background: grey;
+        }
+    }
+
+    &-msg,
+    &-item {
+        line-height: 4.8rem;
+        padding: 0 3.2rem;
+        color: #fff;
+    }
+    &-item {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include transition(background);
+        &.complete span {
+            text-decoration: line-through;
+            opacity: 0.35;
+        }
+        button {
+            opacity: 0;
+            padding: 0.8rem 1.6rem;
+            line-height: 1.5;
+            height: fit-content;
+            font-size: 1.2rem;   
+        }
+
+        &:hover {
+            background: #333;
+            button {
+                opacity: 1;
+            }
+        }
+    }
+}
